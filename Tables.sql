@@ -16,11 +16,13 @@ CREATE TABLE Books (
 	  pageCount INT NOT NULL,
 	  publishedYear INT NOT NULL,
 	  bookCondition VARCHAR(5) NOT NULL,
+      ratingID double Default(0),
 	  recordCreatedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
 	  CONSTRAINT fk_authorBooks Foreign key (authorID) References Author(authorID),
 	  CONSTRAINT fk_publisherBooks Foreign key (publisherID) References Publisher(publisherID),
 	  PRIMARY KEY (bookID)
 );
+
 
 
 # Creating Author Table
@@ -130,7 +132,8 @@ CREATE TABLE Users (
 DESC Inventory;
 DESC Publisher;
 DESC Author;
-DESC OrderItems;
+DESC Order_Items;
+DESC Cart_Item;
 DESC Books;
 DESC Orders;
 DESC Customer;
@@ -148,8 +151,9 @@ Select * from Inventory;
 Select * from Orders;
 Select * from Customer;
 Select * from Payments;
-Select * from OrderItems;
+Select * from Order_Items;
 Select * from Users;
+Select * from Rating;
 
 
 
@@ -168,3 +172,5 @@ Show databases;
 Use BookStoresProject;
 # To view all stored procedures
 SHOW PROCEDURE STATUS WHERE db = 'BookStoresProject';
+
+ALTER TABLE Books ADD COLUMN rating double Default(0);
