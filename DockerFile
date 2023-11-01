@@ -1,0 +1,26 @@
+# Use an official MySQL image as a parent image
+FROM mysql:latest
+
+# Set environment variables for the MySQL instance
+
+ENV MYSQL_ROOT_PASSWORD=password
+ENV MYSQL_DATABASE=bookstoresproject
+ENV MYSQL_PASSWORD=Cheeko@1234
+
+# Generate a random password for the root user
+ENV MYSQL_RANDOM_ROOT_PASSWORD=yes
+
+# Allow an empty password for the root user
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+# Copy SQL dump file into the container
+COPY bookstoresproject.sql /docker-entrypoint-initdb.d/bookstoresproject.sql
+
+# Expose the port on which MySQL will run (default is 3306)
+EXPOSE 3306
+
+# The entry point command to start MySQL
+CMD ["mysqld"]
+
+# Optionally, you can initialize your database with a SQL script by copying it to the /docker-entrypoint-initdb.d/ directory
+# COPY init.sql /docker-entrypoint-initdb.d/
